@@ -1,0 +1,20 @@
+---
+title: "Homework 4 Webpage"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# Welcome!
+
+
+![](https://media.giphy.com/media/XD9o33QG9BoMis7iM4/giphy.gif)
+
+
+Welcome to my first website, as part of Homework 4 for course P8105 Data Science. Please use the navigation bar to toggle between this page ([Home](index.html)), a page about my academic and professional experience ([Resume](about2.html)), a page with a dashboard of weather related data of NYC ([Dashboard](dashboard.html)), links to my GitHub and LinkedIn accounts, as well as a button to send me an email. For any other inquiries please refer to [Google](https://google.com).
+
+
+# Below a corporate shot of me.
+
+<img src="images/tim.jpg" style="width:75%">

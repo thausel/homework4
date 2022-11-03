@@ -1,0 +1,18 @@
+name: "Yay internet!"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - text: "Resume"
+      href: about2.html
+    - text: "Dashboard"
+      href: dashboard.html
+    - icon: fa-envelope fa-lg
+      href: mailto:<thauser22@gsb.columbia.edu>
+    - icon: fa-github fa-lg
+      href: http://github.com/thausel/
+    - icon: fa-brands fa-linkedin
+      href: https://linkedin.com/in/hausertim/
+output:
+  html_document:
+    theme: cerulean

@@ -1,0 +1,72 @@
+---
+title: "Testing Stuff"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+This file will not be included in the final website, it is only here to serve as a testing ground to create the graphs for the dashboard.
+
+```{r}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+```
+
+Loading the weather data
+
+```{r}
+weather_df = 
+  rnoaa::meteo_pull_monitors(
+    c("USW00094728", "USC00519397", "USS0023B17S"),
+    var = c("PRCP", "TMIN", "TMAX"), 
+    date_min = "2017-01-01",
+    date_max = "2017-12-31") %>%
+  mutate(
+    name = recode(
+      id, 
+      USW00094728 = "CentralPark_NY", 
+      USC00519397 = "Waikiki_HA",
+      USS0023B17S = "Waterhole_WA"),
+    tmin = tmin / 10,
+    tmax = tmax / 10) %>%
+  select(name, id, everything())
+
+weather_df
+```
+
+## Plotly plots
+
+# Scatterplot
+
+```{r}
+weather_df %>% 
+  mutate(text_label = str_c("Minimum Temp: ", tmin, "\nMaximum Temp: ", tmax)) %>% 
+  plot_ly(
+    x = ~tmin, y = ~tmax, type = "scatter", mode = "markers",
+    color = ~name, text = ~text_label, colors = "viridis", alpha = 0.5)
+```
+
+## Violin
+
+```{r}
+weather_df %>%
+  mutate(name = fct_relevel(name, c("Waikiki_HA", "CentralPark_NY", "Waterhole_WA"))) %>% 
+  plot_ly(
+    x = ~name, y = ~tmax, type = "violin",
+    color = ~name, colors = "viridis", alpha = 0.5)
+```
+
+## Histogram
+
+```{r}
+weather_df %>% 
+  select(name, tmax, tmin) %>% 
+  pivot_longer(
+    tmax:tmin,
+    names_to = "observation", 
+    values_to = "temp") %>%
+  plot_ly(x = ~temp, color = ~name,
+          type = "histogram", colors = "viridis", alpha = 0.5)
+```
